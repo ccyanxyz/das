@@ -42,7 +42,7 @@ fn check(account: &str) -> bool {
     return lucky_num <= 12;
 }
 
-fn main() {
+fn check_wordlist() {
     let file = File::open("wordlist.txt").expect("file not found");
     let file = BufReader::new(file);
     for line in file.lines().filter_map(|result| result.ok()) {
@@ -51,4 +51,18 @@ fn main() {
             println!("{}: true", line);
         }
     }
+}
+
+fn check_numbers() {
+    for i in 0..100000 {
+        let mut s: String = i.to_string();
+        s = format!("{:0>5}", s);
+        if check(&s) {
+            println!("{}: true", s);
+        }
+    }
+}
+
+fn main() {
+    check_numbers();
 }
